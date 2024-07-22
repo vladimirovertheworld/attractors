@@ -26,7 +26,10 @@ git commit -m "Initial commit" || handle_error "Failed to commit files"
 # Add the remote repository
 git remote add origin $REPO_URL || handle_error "Failed to add remote repository"
 
+# Rename the branch to main
+git branch -M main || handle_error "Failed to rename branch to main"
+
 # Push the files to the remote repository
-git push -u origin master || handle_error "Failed to push files to remote repository"
+git push -u origin main || handle_error "Failed to push files to remote repository"
 
 echo "Repository has been successfully pushed to $REPO_URL"

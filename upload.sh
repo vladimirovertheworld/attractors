@@ -23,8 +23,12 @@ git add . || handle_error "Failed to add files to the repository"
 # Commit the files with a message
 git commit -m "Initial commit" || handle_error "Failed to commit files"
 
-# Add the remote repository
-git remote add origin $REPO_URL || handle_error "Failed to add remote repository"
+# Check if the remote repository already exists
+if git remote | grep origin > /dev/null; then
+    git remote set-url origin $REPO_URL || handle_error "Failed to update remote repository URL"
+else
+    git remote add origin $REPO_URL || handle_error "Failed to add remote repository"
+fi
 
 # Rename the branch to main
 git branch -M main || handle_error "Failed to rename branch to main"
